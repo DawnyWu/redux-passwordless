@@ -29197,17 +29197,21 @@
 /* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reduxForm = __webpack_require__(238);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29216,6 +29220,28 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var validate = function validate(values) {
+	  var errors = {};
+	  // if (!values.username) {
+	  //   errors.username = 'Required';
+	  // } else if (values.username.length > 15) {
+	  //   errors.username = 'Must be 15 characters or less';
+	  // }
+	  if (!values.email) {
+	    errors.email = 'Required';
+	  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+	    errors.email = 'Invalid email address';
+	  }
+	  // if (!values.age) {
+	  //   errors.age = 'Required';
+	  // } else if (isNaN(Number(values.age))) {
+	  //   errors.age = 'Must be a number';
+	  // } else if (Number(values.age) < 18) {
+	  //   errors.age = 'Sorry, you must be at least 18 years old';
+	  // }
+	  return errors;
+	};
 
 	var LoginForm = function (_Component) {
 	  _inherits(LoginForm, _Component);
@@ -29227,22 +29253,36 @@
 	  }
 
 	  _createClass(LoginForm, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
+	      var _props = this.props;
+	      var email = _props.fields.email;
+	      var handleSubmit = _props.handleSubmit;
+
+
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "col-lg-6" },
+	        'form',
+	        { onSubmit: handleSubmit },
 	        _react2.default.createElement(
-	          "div",
-	          { className: "input-group" },
-	          _react2.default.createElement("input", { type: "text", className: "form-control", placeholder: "输入邮箱" }),
+	          'div',
+	          { className: 'col-lg-6' },
 	          _react2.default.createElement(
-	            "span",
-	            { className: "input-group-btn" },
+	            'div',
+	            { className: 'input-group' },
+	            _react2.default.createElement('input', _extends({ type: 'text', className: 'form-control', placeholder: '输入邮箱' }, email)),
+	            email.touched && email.error && _react2.default.createElement(
+	              'div',
+	              null,
+	              email.error
+	            ),
 	            _react2.default.createElement(
-	              "button",
-	              { className: "btn btn-default", type: "button" },
-	              "Go!"
+	              'span',
+	              { className: 'input-group-btn' },
+	              _react2.default.createElement(
+	                'button',
+	                { className: 'btn btn-default', type: 'submit' },
+	                'Go!'
+	              )
 	            )
 	          )
 	        )
@@ -29252,6 +29292,12 @@
 
 	  return LoginForm;
 	}(_react.Component);
+
+	LoginForm = (0, _reduxForm.reduxForm)({ // <----- THIS IS THE IMPORTANT PART!
+	  form: 'login', // a unique name for this form
+	  fields: ['email'], // all the fields in your form
+	  validate: validate
+	})(LoginForm);
 
 	exports.default = LoginForm;
 
