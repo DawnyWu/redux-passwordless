@@ -12,7 +12,7 @@ class NavBar extends Component {
         <nav className="navbar navbar-default">
           <div className="container-fluid">
             <div className="navbar-header">
-              <a className="navbar-brand" href="#">Brand</a>
+              <a className="navbar-brand" href="#">Redux Passwordless</a>
             </div>
 
             <div className="collapse navbar-collapse">
@@ -29,13 +29,13 @@ class NavBar extends Component {
         <nav className="navbar navbar-default">
           <div className="container-fluid">
             <div className="navbar-header">
-              <a className="navbar-brand" href="#">Brand</a>
+              <a className="navbar-brand" href="#">Redux Passwordless</a>
             </div>
 
             <div className="collapse navbar-collapse">
               <ul className="nav navbar-nav navbar-right">
                 <li><a href="#">{email}</a></li>
-                <li><Link onClick={this.props.logoutUser} to="/logout">登出</Link></li>
+                <li><Link onClick={this.props.logoutUser} to="/">登出</Link></li>
               </ul>
             </div>
           </div>

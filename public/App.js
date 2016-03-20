@@ -5,7 +5,7 @@ import NavBarContainer from './containers/NavBarContainer';
 export default class App extends Component {
   render() {
     return (
-      <div>
+      <div className='container'>
         <NavBarContainer/>
         {this.props.children}
       </div>

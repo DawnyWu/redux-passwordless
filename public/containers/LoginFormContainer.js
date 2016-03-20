@@ -25,18 +25,18 @@ function validate(values) {
   return errors;
 } 
 
-const mapStateToProps = (state) => {
-  return { 
+// const mapStateToProps = (state) => {
+//   return { 
 
-  };
-}
+//   };
+// }
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
     sendToken: (props) => {
       dispatch(sendToken(props.email)).then((response) => {
           console.log('response:  '+response)
-            !response.error ? dispatch(userLogin(response.payload.data.email)) : dispatch(sendTokenFailure(response.payload));
+            !response.error ? dispatch(sendTokenSuccess(response.payload.data.email)) : dispatch(sendTokenFailure(response.payload));
           });
     }
   }
@@ -48,4 +48,4 @@ export default reduxForm({
   null,
   null,
   validate 
-}, mapStateToProps, mapDispatchToProps)(LoginForm);
+}, null, mapDispatchToProps)(LoginForm);

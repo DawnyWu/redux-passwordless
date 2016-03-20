@@ -10,6 +10,11 @@ export const CHECK_USER_FAILURE= 'CHECK_USER_FAILURE';
 export const USER_LOGOUT = 'USER_LOGOUT';
 export const USER_LOGOUT_SUCESS = 'USER_LOGOUT_SUCESS';
 
+export function userLogin() {
+  return {
+    type: USER_LOGIN
+  }
+}
 
 export function userLogout() {
   let response = axios.get('http://localhost:3006/api/destory_session')

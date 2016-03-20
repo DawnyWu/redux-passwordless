@@ -27423,6 +27423,7 @@
 	  value: true
 	});
 	exports.USER_LOGOUT_SUCESS = exports.USER_LOGOUT = exports.CHECK_USER_FAILURE = exports.CHECK_USER_SUCCESS = exports.CHECK_USER = undefined;
+	exports.userLogin = userLogin;
 	exports.userLogout = userLogout;
 	exports.checkUser = checkUser;
 	exports.checkUserSuccess = checkUserSuccess;
@@ -27442,6 +27443,12 @@
 	// 通过api销毁session
 	var USER_LOGOUT = exports.USER_LOGOUT = 'USER_LOGOUT';
 	var USER_LOGOUT_SUCESS = exports.USER_LOGOUT_SUCESS = 'USER_LOGOUT_SUCESS';
+
+	function userLogin() {
+	  return {
+	    type: USER_LOGIN
+	  };
+	}
 
 	function userLogout() {
 	  var response = _axios2.default.get('http://localhost:3006/api/destory_session');
@@ -30429,18 +30436,18 @@
 
 	var _MailSent2 = _interopRequireDefault(_MailSent);
 
-	var _Info = __webpack_require__(310);
+	var _InfoContainer = __webpack_require__(319);
 
-	var _Info2 = _interopRequireDefault(_Info);
+	var _InfoContainer2 = _interopRequireDefault(_InfoContainer);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createElement(
 	  _reactRouter.Route,
 	  { path: '/', component: _App2.default },
-	  _react2.default.createElement(_reactRouter.IndexRoute, { component: _MailSent2.default }),
+	  _react2.default.createElement(_reactRouter.IndexRoute, { component: _InfoContainer2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _LoginFormContainer2.default }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/logout', component: _Info2.default }),
+	  _react2.default.createElement(_reactRouter.Route, { path: '/logout', component: _InfoContainer2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/sent', component: _MailSent2.default })
 	);
 
@@ -30486,7 +30493,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { className: 'container' },
 	        _react2.default.createElement(_NavBarContainer2.default, null),
 	        this.props.children
 	      );
@@ -30617,7 +30624,7 @@
 	              _react2.default.createElement(
 	                'a',
 	                { className: 'navbar-brand', href: '#' },
-	                'Brand'
+	                'Redux Passwordless'
 	              )
 	            ),
 	            _react2.default.createElement(
@@ -30653,7 +30660,7 @@
 	            _react2.default.createElement(
 	              'a',
 	              { className: 'navbar-brand', href: '#' },
-	              'Brand'
+	              'Redux Passwordless'
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -30676,7 +30683,7 @@
 	                null,
 	                _react2.default.createElement(
 	                  _reactRouter.Link,
-	                  { onClick: this.props.logoutUser, to: '/logout' },
+	                  { onClick: this.props.logoutUser, to: '/' },
 	                  '登出'
 	                )
 	              )
@@ -30848,16 +30855,18 @@
 	  return errors;
 	}
 
-	var mapStateToProps = function mapStateToProps(state) {
-	  return {};
-	};
+	// const mapStateToProps = (state) => {
+	//   return {
+
+	//   };
+	// }
 
 	var mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
 	  return {
 	    sendToken: function sendToken(props) {
 	      dispatch((0, _login.sendToken)(props.email)).then(function (response) {
 	        console.log('response:  ' + response);
-	        !response.error ? dispatch((0, _user.userLogin)(response.payload.data.email)) : dispatch((0, _login.sendTokenFailure)(response.payload));
+	        !response.error ? dispatch((0, _login.sendTokenSuccess)(response.payload.data.email)) : dispatch((0, _login.sendTokenFailure)(response.payload));
 	      });
 	    }
 	  };
@@ -30867,7 +30876,7 @@
 	  form: 'login',
 	  fields: ['email'],
 	  null: null
-	}, _defineProperty(_reduxForm, 'null', null), _defineProperty(_reduxForm, 'validate', validate), _reduxForm), mapStateToProps, mapDispatchToProps)(_LoginForm2.default);
+	}, _defineProperty(_reduxForm, 'null', null), _defineProperty(_reduxForm, 'validate', validate), _reduxForm), null, mapDispatchToProps)(_LoginForm2.default);
 
 /***/ },
 /* 309 */
@@ -30884,6 +30893,8 @@
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(181);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30911,12 +30922,12 @@
 	        _react2.default.createElement(
 	          'h1',
 	          null,
-	          'Email sent'
+	          '邮件已发送'
 	        ),
 	        _react2.default.createElement(
 	          'p',
 	          null,
-	          'Please check your inbox and click on the link provided'
+	          '请查看邮箱并点击登录链接'
 	        ),
 	        _react2.default.createElement(
 	          'ul',
@@ -30925,18 +30936,9 @@
 	            'li',
 	            null,
 	            _react2.default.createElement(
-	              'a',
-	              { href: '/' },
-	              'Back to homepage'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'a',
-	              { href: '/restricted' },
-	              'Restricted page'
+	              _reactRouter.Link,
+	              { to: '/' },
+	              '返回主页'
 	            )
 	          )
 	        )
@@ -30950,80 +30952,7 @@
 	exports.default = MailSent;
 
 /***/ },
-/* 310 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(181);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Info = function (_Component) {
-	  _inherits(Info, _Component);
-
-	  function Info() {
-	    _classCallCheck(this, Info);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Info).apply(this, arguments));
-	  }
-
-	  _createClass(Info, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'Redux Passwordless'
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          '不需要密码即可登录网站'
-	        ),
-	        _react2.default.createElement(
-	          'ul',
-	          null,
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/login' },
-	              '现在登录试试！'
-	            )
-	          ),
-	          _react2.default.createElement('li', null)
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Info;
-	}(_react.Component);
-
-	exports.default = Info;
-
-/***/ },
+/* 310 */,
 /* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -32059,6 +31988,125 @@
 	}
 
 	module.exports = createLogger;
+
+/***/ },
+/* 319 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _Info = __webpack_require__(320);
+
+	var _Info2 = _interopRequireDefault(_Info);
+
+	var _reactRedux = __webpack_require__(160);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var mapStateToProps = function mapStateToProps(state) {
+	  console.log('state.user.userInfo.email:' + state.user.userInfo.email);
+	  return {
+	    user: state.user.userInfo.email
+	  };
+	};
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(_Info2.default);
+
+/***/ },
+/* 320 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(181);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Info = function (_Component) {
+	  _inherits(Info, _Component);
+
+	  function Info() {
+	    _classCallCheck(this, Info);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Info).apply(this, arguments));
+	  }
+
+	  _createClass(Info, [{
+	    key: 'render',
+
+	    // componentWillMount() {
+	    //   this.props.user;
+	    // }
+
+	    value: function render() {
+	      var user = this.props.user;
+
+	      if (!user) {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'Redux Passwordless'
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            '不需要密码即可登录网站'
+	          ),
+	          _react2.default.createElement(
+	            'ul',
+	            null,
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/login' },
+	                '现在登录试试！'
+	              )
+	            )
+	          )
+	        );
+	      }
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          user,
+	          '登陆成功'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Info;
+	}(_react.Component);
+
+	exports.default = Info;
 
 /***/ }
 /******/ ]);

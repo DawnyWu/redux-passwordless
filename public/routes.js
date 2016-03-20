@@ -5,13 +5,13 @@ import App from './App'
 import LoginForm from './components/LoginForm';
 import LoginFormContainer from './containers/LoginFormContainer';
 import MailSent from './pages/MailSent'
-import Info from './pages/Info'
+import InfoContainer from './containers/InfoContainer'
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={MailSent} />
+    <IndexRoute component={InfoContainer} />
     <Route path="/login" component={LoginFormContainer} />
-    <Route path="/logout" component={Info} />
+    <Route path="/logout" component={InfoContainer} />
     <Route path="/sent" component={MailSent} />
   </Route>
 );
