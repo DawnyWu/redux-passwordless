@@ -2,14 +2,19 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var expressSession = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passwordless = require('passwordless');
+var MongoStore = require('passwordless-mongostore');
+var email   = require("emailjs");
+var routes = require('./routes/index');
 // var mongoose = require('mongoose');
 var router = express.Router();
 
 var app = express();
 
-// app.engine('html', require('ejs').renderFile);
+app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -22,14 +27,55 @@ app.set('view engine', 'html');
 //   next();
 // });
 
+var yourEmail = 'superbatironmans5@gmail.com';
+var yourPwd = 'wzy!((@)(!@!%#!';
+var yourSmtp = 'smtp.gmail.com';
+var smtpServer  = email.server.connect({
+   user:    yourEmail, 
+   password: yourPwd, 
+   host:    yourSmtp, 
+   ssl:     true
+});
+
+var pathToMongoDb = 'mongodb://localhost/redux_passwordless';
+
+// TODO: Path to be send via email
+var host = 'http://localhost:3006/';
+
+// Setup of Passwordless
+passwordless.init(new MongoStore(pathToMongoDb));
+passwordless.addDelivery(
+    function(tokenToSend, uidToSend, recipient, callback) {
+        // Send out token
+        smtpServer.send({
+           text:    'Hello!\nYou can now access your account here: ' 
+                + host + '?token=' + tokenToSend + '&uid=' + encodeURIComponent(uidToSend), 
+           from:    yourEmail, 
+           to:      recipient,
+           subject: 'Token for ' + host
+        }, function(err, message) { 
+            if(err) {
+                console.log(err);
+            }
+            callback(err);
+        });
+    });
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(expressSession({secret: '42', cookie: { maxAge: 1000*60*60*24 }, saveUninitialized: false, resave: false}));
+
+app.use(passwordless.sessionSupport());
+app.use(passwordless.acceptToken({ successRedirect: '/' }));
+
+app.use('/api/', routes);
 
 var staticPath = "public"
-// app.use(express.static(staticPath));
 app.use('/', express.static(staticPath));
+
+
 
 
 // error handlers

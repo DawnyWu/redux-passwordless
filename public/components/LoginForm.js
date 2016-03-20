@@ -28,7 +28,7 @@ class LoginForm extends Component {
   const {fields: {email}, handleSubmit} = this.props;
 
     return(
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(this.props.sendToken.bind(this))}>
         <div className="col-lg-6">
           <div className="input-group">
             <input type="text" className="form-control" placeholder="输入邮箱" {...email}></input>
@@ -43,10 +43,10 @@ class LoginForm extends Component {
   }
 }
 
-LoginForm = reduxForm({ // <----- THIS IS THE IMPORTANT PART!
-  form: 'login',                           // a unique name for this form
-  fields: ['email'], // all the fields in your form
-  validate
-})(LoginForm);
+// LoginForm = reduxForm({ // <----- THIS IS THE IMPORTANT PART!
+//   form: 'login',                           // a unique name for this form
+//   fields: ['email'], // all the fields in your form
+//   validate
+// })(LoginForm);
 
 export default LoginForm

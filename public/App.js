@@ -1,13 +1,14 @@
 import React from 'react';
 import { Component } from 'react';
-// import AppContainer from '../containers/AppContainer';
+import NavBarContainer from './containers/NavBarContainer';
 
 export default class App extends Component {
   render() {
     return (
       <div>
-       {this.props.children}
-       </div>
+        <NavBarContainer/>
+        {this.props.children}
+      </div>
     );
   }
 }
