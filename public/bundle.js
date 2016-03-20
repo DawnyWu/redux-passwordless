@@ -75,11 +75,11 @@
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	var _reduxPromise = __webpack_require__(310);
+	var _reduxPromise = __webpack_require__(311);
 
 	var _reduxPromise2 = _interopRequireDefault(_reduxPromise);
 
-	var _reduxLogger = __webpack_require__(317);
+	var _reduxLogger = __webpack_require__(318);
 
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
@@ -27422,8 +27422,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.CHECK_USER_FAILURE = exports.CHECK_USER_SUCCESS = exports.CHECK_USER = exports.USER_LOGOUT = exports.USER_LOGIN = undefined;
-	exports.userLogin = userLogin;
+	exports.USER_LOGOUT_SUCESS = exports.USER_LOGOUT = exports.CHECK_USER_FAILURE = exports.CHECK_USER_SUCCESS = exports.CHECK_USER = undefined;
 	exports.userLogout = userLogout;
 	exports.checkUser = checkUser;
 	exports.checkUserSuccess = checkUserSuccess;
@@ -27435,23 +27434,17 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var USER_LOGIN = exports.USER_LOGIN = 'USER_LOGIN';
-	var USER_LOGOUT = exports.USER_LOGOUT = 'USER_LOGOUT';
-
 	// 访问接口，利用session查看用户是否为登录状态
 	var CHECK_USER = exports.CHECK_USER = 'CHECK_USER';
 	var CHECK_USER_SUCCESS = exports.CHECK_USER_SUCCESS = 'CHECK_USER_SUCCESS';
 	var CHECK_USER_FAILURE = exports.CHECK_USER_FAILURE = 'CHECK_USER_FAILURE';
 
-	function userLogin(email) {
-	  console.log('email:   ' + email);
-	  return {
-	    type: USER_LOGIN,
-	    payload: email
-	  };
-	}
+	// 通过api销毁session
+	var USER_LOGOUT = exports.USER_LOGOUT = 'USER_LOGOUT';
+	var USER_LOGOUT_SUCESS = exports.USER_LOGOUT_SUCESS = 'USER_LOGOUT_SUCESS';
 
-	function userLogout(data) {
+	function userLogout() {
+	  var response = _axios2.default.get('http://localhost:3006/api/destory_session');
 	  return {
 	    type: USER_LOGOUT
 	  };
@@ -27459,7 +27452,6 @@
 
 	function checkUser() {
 	  var response = _axios2.default.get('http://localhost:3006/api/check_user');
-	  console.log('response:  ' + response);
 	  return {
 	    type: CHECK_USER,
 	    payload: response
@@ -30437,20 +30429,18 @@
 
 	var _MailSent2 = _interopRequireDefault(_MailSent);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	var _Info = __webpack_require__(310);
 
-	// import App from './pages/App';
-	// import PostsIndex from './pages/PostsIndex';
-	// import PostsNew from './pages/PostsNew';
-	// import PostsShow from './pages/PostsShow';
-	// import SignIn from './pages/SignIn';
-	// import SignUp from './pages/SignUp';
+	var _Info2 = _interopRequireDefault(_Info);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createElement(
 	  _reactRouter.Route,
 	  { path: '/', component: _App2.default },
 	  _react2.default.createElement(_reactRouter.IndexRoute, { component: _MailSent2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _LoginFormContainer2.default }),
+	  _react2.default.createElement(_reactRouter.Route, { path: '/logout', component: _Info2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/sent', component: _MailSent2.default })
 	);
 
@@ -30553,6 +30543,9 @@
 	      dispatch((0, _user.checkUser)()).then(function (response) {
 	        !response.error ? dispatch((0, _user.checkUserSuccess)(response.payload)) : dispatch((0, _user.checkUserFailure)(response));
 	      });
+	    },
+	    logoutUser: function logoutUser() {
+	      dispatch((0, _user.userLogout)());
 	    }
 	  };
 	};
@@ -30639,8 +30632,7 @@
 	                  _react2.default.createElement(
 	                    _reactRouter.Link,
 	                    { to: '/login' },
-	                    '登陆 email:',
-	                    email
+	                    '登陆'
 	                  )
 	                )
 	              )
@@ -30674,9 +30666,18 @@
 	                'li',
 	                null,
 	                _react2.default.createElement(
-	                  _reactRouter.Link,
-	                  { to: '/login' },
+	                  'a',
+	                  { href: '#' },
 	                  email
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'li',
+	                null,
+	                _react2.default.createElement(
+	                  _reactRouter.Link,
+	                  { onClick: this.props.logoutUser, to: '/logout' },
+	                  '登出'
 	                )
 	              )
 	            )
@@ -30954,13 +30955,87 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(181);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Info = function (_Component) {
+	  _inherits(Info, _Component);
+
+	  function Info() {
+	    _classCallCheck(this, Info);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Info).apply(this, arguments));
+	  }
+
+	  _createClass(Info, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Redux Passwordless'
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          '不需要密码即可登录网站'
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          null,
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/login' },
+	              '现在登录试试！'
+	            )
+	          ),
+	          _react2.default.createElement('li', null)
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Info;
+	}(_react.Component);
+
+	exports.default = Info;
+
+/***/ },
+/* 311 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	exports.__esModule = true;
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	exports['default'] = promiseMiddleware;
 
-	var _fluxStandardAction = __webpack_require__(311);
+	var _fluxStandardAction = __webpack_require__(312);
 
 	function isPromise(val) {
 	  return val && typeof val.then === 'function';
@@ -30987,7 +31062,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 311 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30998,7 +31073,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _lodashIsplainobject = __webpack_require__(312);
+	var _lodashIsplainobject = __webpack_require__(313);
 
 	var _lodashIsplainobject2 = _interopRequireDefault(_lodashIsplainobject);
 
@@ -31017,7 +31092,7 @@
 	}
 
 /***/ },
-/* 312 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -31028,9 +31103,9 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseFor = __webpack_require__(313),
-	    isArguments = __webpack_require__(314),
-	    keysIn = __webpack_require__(315);
+	var baseFor = __webpack_require__(314),
+	    isArguments = __webpack_require__(315),
+	    keysIn = __webpack_require__(316);
 
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -31126,7 +31201,7 @@
 
 
 /***/ },
-/* 313 */
+/* 314 */
 /***/ function(module, exports) {
 
 	/**
@@ -31180,7 +31255,7 @@
 
 
 /***/ },
-/* 314 */
+/* 315 */
 /***/ function(module, exports) {
 
 	/**
@@ -31429,7 +31504,7 @@
 
 
 /***/ },
-/* 315 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -31440,8 +31515,8 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var isArguments = __webpack_require__(314),
-	    isArray = __webpack_require__(316);
+	var isArguments = __webpack_require__(315),
+	    isArray = __webpack_require__(317);
 
 	/** Used to detect unsigned integer values. */
 	var reIsUint = /^\d+$/;
@@ -31567,7 +31642,7 @@
 
 
 /***/ },
-/* 316 */
+/* 317 */
 /***/ function(module, exports) {
 
 	/**
@@ -31753,7 +31828,7 @@
 
 
 /***/ },
-/* 317 */
+/* 318 */
 /***/ function(module, exports) {
 
 	"use strict";

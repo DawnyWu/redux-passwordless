@@ -66,6 +66,13 @@ router.get('/check_user', function(req, res) {
       user: user
     })
   }
-
 });
+
+router.get('/destory_session', function(req, res){
+  req.session.destroy(function(err) {
+    res.status(200).json({})
+  })
+})
+
+
 module.exports = router;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { USER_LOGIN, USER_LOGOUT, checkUser, checkUserSuccess, checkUserFailure } from '../actions/user';
+import {  userLogout, checkUser, checkUserSuccess, checkUserFailure } from '../actions/user';
 import NavBar from '../components/NavBar.js';
 
 function mapStateToProps(state) {
@@ -24,6 +24,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         .then((response) => {
             !response.error ? dispatch(checkUserSuccess(response.payload)) : dispatch(checkUserFailure(response));
           });
+    },
+    logoutUser: () => {
+      dispatch(userLogout())
     }
   }
 }

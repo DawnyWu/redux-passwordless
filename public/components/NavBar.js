@@ -17,7 +17,7 @@ class NavBar extends Component {
 
             <div className="collapse navbar-collapse">
               <ul className="nav navbar-nav navbar-right">
-                <li><Link to="/login">登陆 email:{email}</Link></li>
+                <li><Link to="/login">登陆</Link></li>
               </ul>
             </div>
           </div>
@@ -34,7 +34,8 @@ class NavBar extends Component {
 
             <div className="collapse navbar-collapse">
               <ul className="nav navbar-nav navbar-right">
-                <li><Link to="/login">{email}</Link></li>
+                <li><a href="#">{email}</a></li>
+                <li><Link onClick={this.props.logoutUser} to="/logout">登出</Link></li>
               </ul>
             </div>
           </div>
