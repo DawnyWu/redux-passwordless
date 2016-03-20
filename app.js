@@ -3,6 +3,7 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var expressSession = require('express-session');
+var MongoSessionStore = require('connect-mongo')(expressSession);
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passwordless = require('passwordless');
@@ -37,6 +38,15 @@ var smtpServer  = email.server.connect({
    ssl:     true
 });
 
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(expressSession({secret: '42', cookie: { maxAge: 1000*60*60*24 }, 
+                        saveUninitialized: false, resave: true,
+                        store: new MongoSessionStore({url: 'mongodb://localhost/redux_passwordless_session'})
+                        }));
+
 var pathToMongoDb = 'mongodb://localhost/redux_passwordless';
 
 // TODO: Path to be send via email
@@ -61,11 +71,7 @@ passwordless.addDelivery(
         });
     });
 
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(expressSession({secret: '42', cookie: { maxAge: 1000*60*60*24 }, saveUninitialized: false, resave: false}));
+
 
 app.use(passwordless.sessionSupport());
 app.use(passwordless.acceptToken({ successRedirect: '/' }));

@@ -27437,6 +27437,7 @@
 
 	var USER_LOGIN = exports.USER_LOGIN = 'USER_LOGIN';
 	var USER_LOGOUT = exports.USER_LOGOUT = 'USER_LOGOUT';
+
 	// 访问接口，利用session查看用户是否为登录状态
 	var CHECK_USER = exports.CHECK_USER = 'CHECK_USER';
 	var CHECK_USER_SUCCESS = exports.CHECK_USER_SUCCESS = 'CHECK_USER_SUCCESS';

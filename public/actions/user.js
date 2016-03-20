@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const USER_LOGIN = 'USER_LOGIN';
 export const USER_LOGOUT = 'USER_LOGOUT';
+
 // 访问接口，利用session查看用户是否为登录状态
 export const CHECK_USER= 'CHECK_USER';
 export const CHECK_USER_SUCCESS= 'CHECK_USER_SUCCESS';
