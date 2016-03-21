@@ -57,7 +57,7 @@ var pathToMongoDb = 'mongodb://localhost/redux_passwordless';
 
 // TODO: Path to be send via email
 if(process.env.NODE_ENV === 'production'){
-  var host = '103.253.146.179'
+  var host = 'http://103.253.146.179:3006/'
 }else{
   var host = 'http://localhost:3006/';
 }
