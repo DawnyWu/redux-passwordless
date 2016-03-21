@@ -18,8 +18,10 @@ router.get('/restricted', passwordless.restricted(),
 
 /* GET login screen. */
 router.get('/login', function(req, res) {
-  console.log("User: "+req.user)
-  // res.render('login', { user: req.user });
+  console.log("User: " + req.user)
+  console.log("env:" + JSON.stringify(process.env.NODE_ENV))
+  console.log("host:" + req.hostname)
+
   res.redirect('/');
 });
 

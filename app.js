@@ -10,10 +10,13 @@ var passwordless = require('passwordless');
 var MongoStore = require('passwordless-mongostore');
 var email   = require("emailjs");
 var routes = require('./routes/index');
+var nconf = require('nconf');
 // var mongoose = require('mongoose');
 var router = express.Router();
 
 var app = express();
+
+nconf.file({ file: './config.json' });
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
@@ -28,15 +31,18 @@ app.set('view engine', 'html');
 //   next();
 // });
 
-var yourEmail = 'superbatironmans5@gmail.com';
-var yourPwd = 'wzy!((@)(!@!%#!';
-var yourSmtp = 'smtp.gmail.com';
+var yourEmail = nconf.get('email');
+var yourPwd = nconf.get('password');
+var yourSmtp = nconf.get('smtp'); 
 var smtpServer  = email.server.connect({
    user:    yourEmail, 
    password: yourPwd, 
    host:    yourSmtp, 
    ssl:     true
 });
+console.log(nconf.get('email'))
+console.log(nconf.get('password'))
+console.log(nconf.get('smtp'))
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -50,7 +56,11 @@ app.use(expressSession({secret: '42', cookie: { maxAge: 1000*60*60*24 },
 var pathToMongoDb = 'mongodb://localhost/redux_passwordless';
 
 // TODO: Path to be send via email
-var host = 'http://localhost:3006/';
+if(process.env.NODE_ENV === 'production'){
+  var host = '103.253.146.179'
+}else{
+  var host = 'http://localhost:3006/';
+}
 
 // Setup of Passwordless
 passwordless.init(new MongoStore(pathToMongoDb));
