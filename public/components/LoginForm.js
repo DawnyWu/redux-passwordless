@@ -24,6 +24,18 @@ const validate = values => {
 };
 
 class LoginForm extends Component {
+  static contextTypes = {
+    router: PropTypes.object,
+    store: React.PropTypes.object
+  };
+
+  componentWillReceiveProps(nextProps) {
+    console.log("componentWillReceiveProps")
+    console.log("nextProps: " + JSON.stringify(nextProps))
+    console.log("State: " + JSON.stringify( this.context.store.getState()))
+    // this.context.router.push('/')
+  }
+
   render() {
   const {fields: {email}, handleSubmit} = this.props;
 
