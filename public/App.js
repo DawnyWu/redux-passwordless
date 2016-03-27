@@ -1,6 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 import NavBarContainer from './containers/NavBarContainer';
+import TestFlashContainer from './containers/TestFlashContainer';
 // import Growler from './components/Growler'
 import {GrowlerContainer} from 'flash-notification-react-redux';
 import GrowlerMessages from './locales/growler.locale.js';
@@ -14,6 +15,7 @@ export default class App extends Component {
         <GrowlerContainer messages={GrowlerMessages} showFor={3000} currentLocale="enUS" />
         <NavBarContainer/>
         {this.props.children}
+        <TestFlashContainer/>
       </div>
     );
   }

@@ -29,7 +29,10 @@ module.exports = {
     { 
       test:[/\.jsx$/,  /\.js$/],
       exclude: /node_modules/,
-      loader: 'babel'
+      loader: 'babel',
+      query: {
+        plugins: ['transform-decorators-legacy' ]
+      }
     }
     ]
   },

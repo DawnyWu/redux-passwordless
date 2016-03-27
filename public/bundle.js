@@ -75,17 +75,17 @@
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	var _reduxPromise = __webpack_require__(322);
+	var _reduxPromise = __webpack_require__(324);
 
 	var _reduxPromise2 = _interopRequireDefault(_reduxPromise);
 
-	var _reduxLogger = __webpack_require__(329);
+	var _reduxLogger = __webpack_require__(331);
 
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
 	var _flashNotificationReactRedux = __webpack_require__(254);
 
-	var _reduxThunk = __webpack_require__(330);
+	var _reduxThunk = __webpack_require__(332);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -31012,19 +31012,19 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _LoginForm = __webpack_require__(317);
+	var _LoginForm = __webpack_require__(319);
 
 	var _LoginForm2 = _interopRequireDefault(_LoginForm);
 
-	var _LoginFormContainer = __webpack_require__(318);
+	var _LoginFormContainer = __webpack_require__(320);
 
 	var _LoginFormContainer2 = _interopRequireDefault(_LoginFormContainer);
 
-	var _MailSent = __webpack_require__(319);
+	var _MailSent = __webpack_require__(321);
 
 	var _MailSent2 = _interopRequireDefault(_MailSent);
 
-	var _InfoContainer = __webpack_require__(320);
+	var _InfoContainer = __webpack_require__(322);
 
 	var _InfoContainer2 = _interopRequireDefault(_InfoContainer);
 
@@ -31048,6 +31048,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.default = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -31059,9 +31060,13 @@
 
 	var _NavBarContainer2 = _interopRequireDefault(_NavBarContainer);
 
+	var _TestFlashContainer = __webpack_require__(315);
+
+	var _TestFlashContainer2 = _interopRequireDefault(_TestFlashContainer);
+
 	var _flashNotificationReactRedux = __webpack_require__(254);
 
-	var _growlerLocale = __webpack_require__(315);
+	var _growlerLocale = __webpack_require__(317);
 
 	var _growlerLocale2 = _interopRequireDefault(_growlerLocale);
 
@@ -31095,7 +31100,8 @@
 	        { className: 'container' },
 	        _react2.default.createElement(_flashNotificationReactRedux.GrowlerContainer, { messages: _growlerLocale2.default, showFor: 3000, currentLocale: 'enUS' }),
 	        _react2.default.createElement(_NavBarContainer2.default, null),
-	        this.props.children
+	        this.props.children,
+	        _react2.default.createElement(_TestFlashContainer2.default, null)
 	      );
 	    }
 	  }]);
@@ -31308,8 +31314,130 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.default = undefined;
 
-	var _growlerEn_us = __webpack_require__(316);
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _dec, _class;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _redux = __webpack_require__(166);
+
+	var _reactRedux = __webpack_require__(160);
+
+	var _TestFlash = __webpack_require__(316);
+
+	var _TestFlash2 = _interopRequireDefault(_TestFlash);
+
+	var _flashNotificationReactRedux = __webpack_require__(254);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var mapStateToProps = function mapStateToProps(state) {
+	  return { growler: state.growler };
+	};
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return _extends({}, (0, _redux.bindActionCreators)(_flashNotificationReactRedux.GrowlerActions, dispatch));
+	};
+
+	var TestFlashContainer = (_dec = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps), _dec(_class = function (_React$Component) {
+	  _inherits(TestFlashContainer, _React$Component);
+
+	  function TestFlashContainer() {
+	    _classCallCheck(this, TestFlashContainer);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TestFlashContainer).apply(this, arguments));
+	  }
+
+	  _createClass(TestFlashContainer, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(_TestFlash2.default, this.props);
+	    }
+	  }]);
+
+	  return TestFlashContainer;
+	}(_react2.default.Component)) || _class);
+	exports.default = TestFlashContainer;
+
+/***/ },
+/* 316 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TestFlash = function TestFlash(_ref) {
+	  var showGrowlerSuccess = _ref.showGrowlerSuccess;
+	  var showGrowlerError = _ref.showGrowlerError;
+
+
+	  return _react2.default.createElement(
+	    'section',
+	    null,
+	    _react2.default.createElement('br', null),
+	    _react2.default.createElement('br', null),
+	    _react2.default.createElement('br', null),
+	    _react2.default.createElement('br', null),
+	    _react2.default.createElement('br', null),
+	    _react2.default.createElement(
+	      'h2',
+	      null,
+	      'Redux Flash notification Example'
+	    ),
+	    _react2.default.createElement('br', null),
+	    _react2.default.createElement('br', null),
+	    _react2.default.createElement('br', null),
+	    _react2.default.createElement(
+	      'button',
+	      { onClick: function onClick(evt) {
+	          evt.preventDefault();showGrowlerSuccess('Success with no key');
+	        } },
+	      'Success message with no key'
+	    ),
+	    _react2.default.createElement(
+	      'button',
+	      { onClick: function onClick(evt) {
+	          evt.preventDefault();showGrowlerError('error');
+	        } },
+	      'Error message with key'
+	    )
+	  );
+	};
+
+	exports.default = TestFlash;
+
+/***/ },
+/* 317 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _growlerEn_us = __webpack_require__(318);
 
 	var _growlerEn_us2 = _interopRequireDefault(_growlerEn_us);
 
@@ -31322,7 +31450,7 @@
 	exports.default = growlerMessages;
 
 /***/ },
-/* 316 */
+/* 318 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31337,7 +31465,7 @@
 	exports.default = growlerMessages;
 
 /***/ },
-/* 317 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31349,6 +31477,8 @@
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _class, _temp;
 
 	var _react = __webpack_require__(2);
 
@@ -31386,7 +31516,7 @@
 	  return errors;
 	};
 
-	var LoginForm = function (_Component) {
+	var LoginForm = (_temp = _class = function (_Component) {
 	  _inherits(LoginForm, _Component);
 
 	  function LoginForm() {
@@ -31442,7 +31572,10 @@
 	  }]);
 
 	  return LoginForm;
-	}(_react.Component);
+	}(_react.Component), _class.contextTypes = {
+	  router: _react.PropTypes.object,
+	  store: _react2.default.PropTypes.object
+	}, _temp);
 
 	// LoginForm = reduxForm({ // <----- THIS IS THE IMPORTANT PART!
 	//   form: 'login',                           // a unique name for this form
@@ -31450,14 +31583,10 @@
 	//   validate
 	// })(LoginForm);
 
-	LoginForm.contextTypes = {
-	  router: _react.PropTypes.object,
-	  store: _react2.default.PropTypes.object
-	};
 	exports.default = LoginForm;
 
 /***/ },
-/* 318 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31468,7 +31597,7 @@
 
 	var _reduxForm;
 
-	var _LoginForm = __webpack_require__(317);
+	var _LoginForm = __webpack_require__(319);
 
 	var _LoginForm2 = _interopRequireDefault(_LoginForm);
 
@@ -31528,7 +31657,7 @@
 	}, _defineProperty(_reduxForm, 'null', null), _defineProperty(_reduxForm, 'validate', validate), _reduxForm), null, mapDispatchToProps)(_LoginForm2.default);
 
 /***/ },
-/* 319 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31601,7 +31730,7 @@
 	exports.default = MailSent;
 
 /***/ },
-/* 320 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31610,7 +31739,7 @@
 	  value: true
 	});
 
-	var _Info = __webpack_require__(321);
+	var _Info = __webpack_require__(323);
 
 	var _Info2 = _interopRequireDefault(_Info);
 
@@ -31628,7 +31757,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(_Info2.default);
 
 /***/ },
-/* 321 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31720,7 +31849,7 @@
 	exports.default = Info;
 
 /***/ },
-/* 322 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31731,7 +31860,7 @@
 
 	exports['default'] = promiseMiddleware;
 
-	var _fluxStandardAction = __webpack_require__(323);
+	var _fluxStandardAction = __webpack_require__(325);
 
 	function isPromise(val) {
 	  return val && typeof val.then === 'function';
@@ -31758,7 +31887,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 323 */
+/* 325 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31769,7 +31898,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _lodashIsplainobject = __webpack_require__(324);
+	var _lodashIsplainobject = __webpack_require__(326);
 
 	var _lodashIsplainobject2 = _interopRequireDefault(_lodashIsplainobject);
 
@@ -31788,7 +31917,7 @@
 	}
 
 /***/ },
-/* 324 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -31799,9 +31928,9 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseFor = __webpack_require__(325),
-	    isArguments = __webpack_require__(326),
-	    keysIn = __webpack_require__(327);
+	var baseFor = __webpack_require__(327),
+	    isArguments = __webpack_require__(328),
+	    keysIn = __webpack_require__(329);
 
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -31897,7 +32026,7 @@
 
 
 /***/ },
-/* 325 */
+/* 327 */
 /***/ function(module, exports) {
 
 	/**
@@ -31951,7 +32080,7 @@
 
 
 /***/ },
-/* 326 */
+/* 328 */
 /***/ function(module, exports) {
 
 	/**
@@ -32200,7 +32329,7 @@
 
 
 /***/ },
-/* 327 */
+/* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -32211,8 +32340,8 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var isArguments = __webpack_require__(326),
-	    isArray = __webpack_require__(328);
+	var isArguments = __webpack_require__(328),
+	    isArray = __webpack_require__(330);
 
 	/** Used to detect unsigned integer values. */
 	var reIsUint = /^\d+$/;
@@ -32338,7 +32467,7 @@
 
 
 /***/ },
-/* 328 */
+/* 330 */
 /***/ function(module, exports) {
 
 	/**
@@ -32524,7 +32653,7 @@
 
 
 /***/ },
-/* 329 */
+/* 331 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -32757,7 +32886,7 @@
 	module.exports = createLogger;
 
 /***/ },
-/* 330 */
+/* 332 */
 /***/ function(module, exports) {
 
 	'use strict';
