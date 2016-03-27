@@ -7,9 +7,11 @@ import reducers from './reducers';
 import routes from './routes';
 import promise from 'redux-promise';
 import createLogger from 'redux-logger';
+import { GrowlerComponent } from 'flash-notification-react-redux';
+import reduxThunk from 'redux-thunk'
 
 const logger = createLogger();
-const createStoreWithMiddleware = applyMiddleware(promise,logger)(createStore);
+const createStoreWithMiddleware = applyMiddleware(reduxThunk, promise,logger)(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
