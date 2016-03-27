@@ -31395,19 +31395,6 @@
 	  return _react2.default.createElement(
 	    'section',
 	    null,
-	    _react2.default.createElement('br', null),
-	    _react2.default.createElement('br', null),
-	    _react2.default.createElement('br', null),
-	    _react2.default.createElement('br', null),
-	    _react2.default.createElement('br', null),
-	    _react2.default.createElement(
-	      'h2',
-	      null,
-	      'Redux Flash notification Example'
-	    ),
-	    _react2.default.createElement('br', null),
-	    _react2.default.createElement('br', null),
-	    _react2.default.createElement('br', null),
 	    _react2.default.createElement(
 	      'button',
 	      { onClick: function onClick(evt) {
@@ -31607,6 +31594,8 @@
 
 	var _user = __webpack_require__(266);
 
+	var _flashNotificationReactRedux = __webpack_require__(254);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -31643,8 +31632,15 @@
 	  return {
 	    sendToken: function sendToken(props) {
 	      dispatch((0, _login.sendToken)(props.email)).then(function (response) {
-	        console.log('response:  ' + response);
-	        !response.error ? dispatch((0, _login.sendTokenSuccess)(response.payload.data.email)) : dispatch((0, _login.sendTokenFailure)(response.payload));
+	        if (!response.error) {
+	          // console.log(GrowlerActions.showGrowlerSuccess)
+	          dispatch(_flashNotificationReactRedux.GrowlerActions.showGrowlerSuccess("邮件发送成功，快去你的邮箱看看吧"));
+	          dispatch((0, _login.sendTokenSuccess)(response.payload.data.email));
+	        } else {
+	          dispatch(_flashNotificationReactRedux.GrowlerActions.showGrowlerSuccess("success"));
+	          // console.log(GrowlerActions.showGrowlerSuccess)
+	          dispatch((0, _login.sendTokenFailure)(response.payload));
+	        }
 	      });
 	    }
 	  };

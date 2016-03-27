@@ -2,6 +2,8 @@ import LoginForm from '../components/LoginForm'
 import { reduxForm } from 'redux-form';
 import {sendToken, sendTokenSuccess, sendTokenFailure} from '../actions/login'
 import {userLogin} from '../actions/user'
+import {GrowlerActions} from 'flash-notification-react-redux'
+
 
 function validate(values) {
   const errors = {};
@@ -35,12 +37,21 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     sendToken: (props) => {
       dispatch(sendToken(props.email)).then((response) => {
-          console.log('response:  '+response)
-            !response.error ? dispatch(sendTokenSuccess(response.payload.data.email)) : dispatch(sendTokenFailure(response.payload));
-          });
+          if(!response.error)
+          {
+            // console.log(GrowlerActions.showGrowlerSuccess)
+            dispatch(GrowlerActions.showGrowlerSuccess("邮件发送成功，快去你的邮箱看看吧"))
+            dispatch(sendTokenSuccess(response.payload.data.email))
+          }else{
+            dispatch(GrowlerActions.showGrowlerSuccess("success"))
+            // console.log(GrowlerActions.showGrowlerSuccess)
+            dispatch(sendTokenFailure(response.payload));
+          }
+      })
     }
   }
 }
+
 
 export default reduxForm({
   form: 'login', 
