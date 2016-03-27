@@ -37,13 +37,14 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     sendToken: (props) => {
       dispatch(sendToken(props.email)).then((response) => {
+          // 查看的应该是status code
           if(!response.error)
           {
             // console.log(GrowlerActions.showGrowlerSuccess)
             dispatch(GrowlerActions.showGrowlerSuccess("邮件发送成功，快去你的邮箱看看吧"))
             dispatch(sendTokenSuccess(response.payload.data.email))
           }else{
-            dispatch(GrowlerActions.showGrowlerSuccess("success"))
+            dispatch(GrowlerActions.showGrowlerError("邮件发送失败，请重新尝试"))
             // console.log(GrowlerActions.showGrowlerSuccess)
             dispatch(sendTokenFailure(response.payload));
           }

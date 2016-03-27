@@ -31632,12 +31632,13 @@
 	  return {
 	    sendToken: function sendToken(props) {
 	      dispatch((0, _login.sendToken)(props.email)).then(function (response) {
+	        // 查看的应该是status code
 	        if (!response.error) {
 	          // console.log(GrowlerActions.showGrowlerSuccess)
 	          dispatch(_flashNotificationReactRedux.GrowlerActions.showGrowlerSuccess("邮件发送成功，快去你的邮箱看看吧"));
 	          dispatch((0, _login.sendTokenSuccess)(response.payload.data.email));
 	        } else {
-	          dispatch(_flashNotificationReactRedux.GrowlerActions.showGrowlerSuccess("success"));
+	          dispatch(_flashNotificationReactRedux.GrowlerActions.showGrowlerError("邮件发送失败，请重新尝试"));
 	          // console.log(GrowlerActions.showGrowlerSuccess)
 	          dispatch((0, _login.sendTokenFailure)(response.payload));
 	        }
