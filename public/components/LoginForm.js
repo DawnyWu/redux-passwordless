@@ -30,13 +30,10 @@ class LoginForm extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    console.log("componentWillReceiveProps")
-    console.log("nextProps: " + JSON.stringify(nextProps))
-    console.log("State: " + JSON.stringify( this.context.store.getState()))
-    // this.context.router.push('/')
   }
 
   render() {
+    console.log("login form this:" + this)
   const {fields: {email}, handleSubmit} = this.props;
 
     return(

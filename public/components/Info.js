@@ -17,6 +17,24 @@ class Info extends Component {
             <li>
               <Link to="/login">现在登录试试！</Link>
             </li>
+            <li>
+              <Link to="/posts">posts</Link>
+            </li>
+            <li>
+              <Link to="/posts/1">post 1</Link>
+              <Link to="/posts/2">post 2</Link>
+              <Link to="/posts/3">post 3</Link>
+              <Link to="/posts/4">post 4</Link>
+              <Link to="/posts/999">post error</Link>
+            </li>
+            <li>
+              Comments
+              <Link to="/posts/1/comments">post 1</Link>
+              <Link to="/posts/2/comments">post 2</Link>
+              <Link to="/posts/3/comments">post 3</Link>
+              <Link to="/posts/4/comments">post 4</Link>
+              <Link to="/posts/999/comments">post error</Link>
+            </li>
           </ul>
         </div>
       );      

@@ -4,7 +4,6 @@ import {sendToken, sendTokenSuccess, sendTokenFailure} from '../actions/login'
 import {userLogin} from '../actions/user'
 import {GrowlerActions} from 'flash-notification-react-redux'
 
-
 function validate(values) {
   const errors = {};
   // if (!values.username) {
@@ -36,11 +35,14 @@ function validate(values) {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     sendToken: (props) => {
+      console.log("props:" + JSON.stringify(props))
+      console.log("this context:" + this.context)
       dispatch(sendToken(props.email)).then((response) => {
           // 查看的应该是status code
           if(!response.error)
           {
             // console.log(GrowlerActions.showGrowlerSuccess)
+            // this.context.router.push('/')
             dispatch(GrowlerActions.showGrowlerSuccess("邮件发送成功，快去你的邮箱看看吧"))
             dispatch(sendTokenSuccess(response.payload.data.email))
           }else{

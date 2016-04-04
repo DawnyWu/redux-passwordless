@@ -15,7 +15,7 @@ module.exports = {
       // loaders: ['react-hot', 'babel?stage=0&loose[]=es6.modules'],
       loader: 'babel',
       query: {
-        plugins: ['transform-decorators-legacy' ]
+        plugins: ['transform-decorators-legacy', 'transform-es2015-arrow-functions']
       },
       include: [
         // path.resolve(__dirname, "./src"),
@@ -23,8 +23,14 @@ module.exports = {
       ],
     },
     {
+      test: /\.css$/,
+      loaders: ['style', 'css?modules&importLoaders=1', 'postcss'],
+      include: path.join(__dirname, 'public')
+    },
+    {
       test: [/\.scss$/, /\.css$/],
       loader: 'css?localIdentName=[path]!postcss-loader!sass',
+      include: path.join(__dirname, 'node_modules')
     },
     { 
       test:[/\.jsx$/,  /\.js$/],

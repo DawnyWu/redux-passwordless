@@ -48,7 +48,7 @@ router.post('/sendtoken',
   function(req, res) {
       // res.json('success');
       // res.render('sent')
-      res.status(400).json({
+      res.json({
         error: "wuzhaoyang@gmail.com"
       })
 }
