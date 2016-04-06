@@ -6,12 +6,14 @@ import LoginForm from './components/LoginForm';
 import LoginFormContainer from './containers/LoginFormContainer';
 import MailSent from './pages/MailSent'
 import InfoContainer from './containers/InfoContainer'
+import PostsContainer from './containers/PostsContainer'
 import PostPage from './pages/PostPage'
 import PostComments from './pages/PostComments'
 
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={InfoContainer} />
+    <Route path="/posts" component={PostsContainer} />
     <Route path="/login" component={LoginFormContainer} />
     <Route path="/posts/:id" component={PostPage} />
     <Route path="/posts/:id/comments" component={PostComments} />

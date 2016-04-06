@@ -1,4 +1,4 @@
-import {GET_COMMENTS, GET_COMMENTS_SUCCESS, GET_COMMENTS_FAILURE} 
+import {GET_COMMENTS, GET_COMMENTS_SUCCESS, GET_COMMENTS_FAILURE, RESET_COMMENTS} 
 from '../actions/comments'
 
 const INITIAL_STATE = {
@@ -15,6 +15,8 @@ export default function(state = INITIAL_STATE, action) {
   case GET_COMMENTS_FAILURE:
     let error = action.payload.data || {message: action.payload.message};//2nd one is network or server down errors
     return { ...state, comments: [], error: error, loading: false};
+  case RESET_COMMENTS:
+    return { ...state, ...INITIAL_STATE}
   default:
     return state;
   }

@@ -1,0 +1,25 @@
+.topic {
+    min-height: 68px;
+    border-bottom: 1px solid #F0F0F0;
+    padding: 10px 15px;
+    margin: 0 -15px;
+    vertical-align: top;
+    position: relative;
+    overflow: hidden;
+    zoom: 1;
+}
+
+.infos {
+    display: table-cell;
+    vertical-align: top;
+    width: 10000px;
+    overflow: hidden;
+    zoom: 1;
+    min-height: 48px;
+}
+
+.title {
+    font-size: 15px;
+    margin-top: 0;
+    margin-bottom: 5px;
+}

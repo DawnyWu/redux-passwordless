@@ -35,6 +35,9 @@ class Info extends Component {
               <Link to="/posts/4/comments">post 4</Link>
               <Link to="/posts/999/comments">post error</Link>
             </li>
+            <li>
+              <Link to="/posts">posts</Link>
+            </li>
           </ul>
         </div>
       );      

@@ -1,5 +1,5 @@
 import Comments from '../components/Comments.js';
-import { getComments, getCommentsSuccess, getCommentsFailure  } from '../actions/Comments';
+import { getComments, getCommentsSuccess, getCommentsFailure, resetComments  } from '../actions/comments';
 import { connect } from 'react-redux';
 import {GrowlerActions} from 'flash-notification-react-redux';
 
@@ -20,6 +20,9 @@ const mapDispatchToProps = (dispatch) => {
               dispatch(GrowlerActions.showGrowlerError(data.payload.statusText));
             }
           }) 
+    },
+    resetMe: () =>{
+      dispatch(resetComments());
     }
   }
 }

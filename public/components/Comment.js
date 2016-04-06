@@ -1,5 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import styles from './Comment.css'
+import Avatar from 'react-avatar'
+import ReactLetterAvatar from 'react-letter-avatar'
+import Infinite from 'react-infinite'
 
 class Comment extends Component {
 
@@ -10,7 +13,12 @@ class Comment extends Component {
     
     return(
       <div className={styles.reply}>
-        {email}:{body}
+        <div className={styles.avatar}>
+        <ReactLetterAvatar name='aello' size={48}/>
+        </div>
+        <div className={styles.infos}>
+          {body}
+        </div>
       </div>
     )
   }

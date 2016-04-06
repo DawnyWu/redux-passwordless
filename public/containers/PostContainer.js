@@ -1,5 +1,5 @@
 import Post from '../components/Post.js';
-import { getPost, getPostSuccess, getPostFailure  } from '../actions/post';
+import { getPost, getPostSuccess, getPostFailure, resetPost  } from '../actions/post';
 import { connect } from 'react-redux';
 import {GrowlerActions} from 'flash-notification-react-redux';
 
@@ -24,6 +24,9 @@ const mapDispatchToProps = (dispatch) => {
               dispatch(GrowlerActions.showGrowlerError(data.payload.statusText));
             }
           }) 
+    },
+    resetMe: () =>{
+      dispatch(resetPost());
     }
   }
 }

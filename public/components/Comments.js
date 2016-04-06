@@ -4,6 +4,9 @@ import Comment from './Comment'
 import _ from 'lodash'
 
 class Comments extends Component {
+  componentWillMount() {
+     this.props.resetMe();
+  }
 
   componentDidMount() {
     this.props.getComments(this.props.postId);
