@@ -12,6 +12,9 @@ import reduxThunk from 'redux-thunk'
 
 const logger = createLogger();
 const createStoreWithMiddleware = applyMiddleware(reduxThunk, promise,logger)(createStore);
+// console.log('window:'+window)
+window.React = React
+window.ReactDOM = ReactDOM
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>

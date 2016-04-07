@@ -6,7 +6,8 @@ export const GET_COMMENTS_SUCCESS = 'GET_COMMENTS_SUCCESS';
 export const GET_COMMENTS_FAILURE = 'GET_COMMENTS_FAILURE';
 export const RESET_COMMENTS = 'RESET_COMMENTS';
 
-const host = 'http://localhost:3000'
+// const host = 'http://localhost:3000'
+const host = 'http://jsonplaceholder.typicode.com'
 export const getComments = (id) => {
   let request = axios.get(`${host}/posts/${id}/comments`)
   return {

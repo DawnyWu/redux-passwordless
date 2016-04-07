@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import Comment from './Comment'
 import _ from 'lodash'
+import Infinite from 'react-infinite'
 
 class Comments extends Component {
   componentWillMount() {
@@ -31,13 +32,36 @@ class Comments extends Component {
     })
 
     return (
+      <div>
+      <Infinite containerHeight={100} elementHeight={40}>
+        <div>hello</div>
+        <div>hello</div>
+        <div>hello</div>
+        <div>hello</div>
+        <div>hello</div>
+        <div>hello</div>
+        <div>hello</div>
+        <div>hello</div>
+        <div>hello</div>
+        <div>hello</div>
+        <div>hello</div>
+        <div>hello</div>
+        <div>hello</div>
+        <div>hello</div>
+        <div>hello</div>
+        <div>hello</div>
+        <div>hello</div>
+      </Infinite>
       <div className="panel panel-default" >
         <div className="total panel-heading">
           共收到 <b>{comments.length}</b> 条回复
         </div>       
         <div className="panel-body">
-          {commentsSection}
+          <Infinite containerHeight={500} elementHeight={40}>
+            {commentsSection}
+          </Infinite>
         </div>
+      </div>
       </div>
     );
   }

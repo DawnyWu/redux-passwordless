@@ -1,5 +1,8 @@
 import Posts from '../components/Posts.js';
-import { getPosts, getPostsSuccess, getPostsFailure  } from '../actions/posts';
+import  
+{ getPosts, getPostsSuccess, getPostsFailure,
+  getMorePosts, getMorePostsSuccess, getMorePostsFailure, resetPosts
+} from '../actions/posts';
 import { connect } from 'react-redux';
 import {GrowlerActions} from 'flash-notification-react-redux';
 
@@ -20,6 +23,21 @@ const mapDispatchToProps = (dispatch) => {
               dispatch(GrowlerActions.showGrowlerError(data.payload.statusText));
             }
           }) 
+    },
+    getMorePosts: (start) => {
+      dispatch(getMorePosts(start))
+        .then((data) => 
+          {
+            if(!data.error){
+              dispatch(getMorePostsSuccess(data.payload))
+            }else{
+              dispatch(getMorePostsFailure(data.payload));
+              dispatch(GrowlerActions.showGrowlerError(data.payload.statusText));
+            }
+          }) 
+    },
+    resetMe: () =>{
+      dispatch(resetPosts());
     }
   }
 }

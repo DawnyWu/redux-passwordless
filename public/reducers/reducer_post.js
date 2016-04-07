@@ -1,8 +1,9 @@
-import {GET_POST, GET_POST_SUCCESS, GET_POST_FAILURE, RESET_POST} 
+import { GET_POST, GET_POST_SUCCESS, GET_POST_FAILURE, RESET_POST
+} 
 from '../actions/post'
 
 const INITIAL_STATE = { 
-  post: {}, error:null, loading: false
+  post: {}, error: null, loading: true
 };
 
 export default function(state = INITIAL_STATE, action) {
