@@ -18,6 +18,9 @@ class Info extends Component {
               <Link to="/login">现在登录试试！</Link>
             </li>
             <li>
+              <Link to="/github">Github</Link>
+            </li>
+            <li>
               <Link to="/posts">posts</Link>
             </li>
             <li>

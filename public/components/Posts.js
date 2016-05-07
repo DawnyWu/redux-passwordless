@@ -4,6 +4,7 @@ import PostItem from './PostItem'
 import _ from 'lodash'
 import Infinite from 'react-infinite'
 import axios from 'axios';
+import Loader from 'react-loader'
 
 class Posts extends Component {
   componentWillMount() {
@@ -24,9 +25,10 @@ class Posts extends Component {
 
   render() {
     let { posts, loading, error } = this.props.posts;
-    // if (loading) {
-    //   return <div className="container">Loading...</div>;
-    // } else if(error) {
+    if (loading) {
+      return <Loader loaded={!loading} ></Loader>
+    } else 
+    // if(error) {
     //   return  <div className="alert alert-danger">{error.message}</div>
     // } else
     if(!posts) {

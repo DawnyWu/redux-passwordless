@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
-
+var axios = require('axios');
 var passwordless = require('passwordless');
+var querystring = require('querystring')
 // var passwordless = require('../../../');
 
 
@@ -30,6 +31,23 @@ router.get('/logout', passwordless.logout(),
   function(req, res) {
   res.redirect('/');
 });
+
+router.get('/githubToken', function (req, res) {
+  var client_id = 'a4a062caf4edbc424290'
+  var client_secret = '757d24da7beb8b5049738ab690607ea639c03898'  
+  var code = req.query.code
+
+  var access_token
+  axios.post('https://github.com/login/oauth/access_token',
+    {code: code, client_id: client_id, client_secret: client_secret})
+  .then(function (response) {
+    access_token = querystring.parse(response.data).access_token
+    console.log('parse access_token:'+JSON.stringify(querystring.parse(response.data)));
+    res.json({
+      access_token: access_token
+    })
+  })
+})
 
 /* POST login screen. */
 router.post('/sendtoken', 

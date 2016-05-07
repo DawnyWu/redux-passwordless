@@ -36,7 +36,7 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     sendToken: (props) => {
       console.log("props:" + JSON.stringify(props))
-      console.log("this context:" + this.context)
+      // console.log("this context:" + this.context)
       dispatch(sendToken(props.email)).then((response) => {
           // 查看的应该是status code
           if(!response.error)

@@ -1,18 +1,13 @@
 import axios from 'axios';
 
-// 获得posts
-export const GET_POSTS = 'GET_POSTS';
-export const GET_POSTS_SUCCESS = 'GET_POSTS_SUCCESS';
-export const GET_POSTS_FAILURE = 'GET_POSTS_FAILURE';
-
-export const GET_MORE_POSTS = 'GET_MORE_POSTS';
-export const GET_MORE_POSTS_SUCCESS = 'GET_MORE_POSTS_SUCCESS';
-export const GET_MORE_POSTS_FAILURE = 'GET_MORE_POSTS_FAILURE';
-export const RESET_POSTS = 'RESET_POSTS';
+// 获得LIST
+export const GET_LIST = 'GET_LIST';
+export const GET_LIST_SUCCESS = 'GET_LIST_SUCCESS';
+export const GET_LIST_FAILURE = 'GET_LIST_FAILURE';
 
 // let host = 'http://localhost:3000'
 let host = 'http://jsonplaceholder.typicode.com'
-export const getPosts = () => {
+export const getList = () => {
   let request = axios.get(`${host}/posts?_start=0&_limit=10`)
   return {
     type: GET_POSTS,

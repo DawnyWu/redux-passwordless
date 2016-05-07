@@ -13,7 +13,6 @@ class Comments extends Component {
     this.props.getComments(this.props.postId);
   }
 
-
   render() {
     let { comments, loading, error } = this.props.comments;
     // if (loading) {
@@ -33,33 +32,12 @@ class Comments extends Component {
 
     return (
       <div>
-      <Infinite containerHeight={100} elementHeight={40}>
-        <div>hello</div>
-        <div>hello</div>
-        <div>hello</div>
-        <div>hello</div>
-        <div>hello</div>
-        <div>hello</div>
-        <div>hello</div>
-        <div>hello</div>
-        <div>hello</div>
-        <div>hello</div>
-        <div>hello</div>
-        <div>hello</div>
-        <div>hello</div>
-        <div>hello</div>
-        <div>hello</div>
-        <div>hello</div>
-        <div>hello</div>
-      </Infinite>
       <div className="panel panel-default" >
         <div className="total panel-heading">
           共收到 <b>{comments.length}</b> 条回复
         </div>       
         <div className="panel-body">
-          <Infinite containerHeight={500} elementHeight={40}>
-            {commentsSection}
-          </Infinite>
+          {commentsSection}
         </div>
       </div>
       </div>

@@ -5,7 +5,7 @@ import {GET_POSTS, GET_POSTS_SUCCESS, GET_POSTS_FAILURE,
 import _ from 'lodash'
 
 const INITIAL_STATE = { 
-  posts: [], error: null, loading: false
+  posts: [], error: null, loading: true
 };
 
 export default function(state = INITIAL_STATE, action) {

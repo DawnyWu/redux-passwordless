@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import styles from './PostItem.css'
-import Avatar from 'react-avatar'
+import Avatar from 'react-letter-avatar'
 import {Link} from 'react-router'
 
 class PostItem extends Component {
@@ -12,7 +12,7 @@ class PostItem extends Component {
     return(
       <div className={styles.topic}>
         <div className="avatar media-left">
-          <Avatar size={48} />
+          <Avatar name={title} size={48} />
         </div>
         <div className={styles.infos}>
           <div className={styles.title}>
