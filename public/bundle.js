@@ -28080,15 +28080,16 @@
 	}
 
 	function userLogout() {
-	  // let response = axios.get('http://103.253.146.179:3006/api/destory_session')
-	  var response = _axios2.default.get('http://localhost:3006/api/destory_session');
+	  var response = _axios2.default.get('http://103.253.146.179:3006/api/destory_session');
+	  // let response = axios.get('http://localhost:3006/api/destory_session')
 	  return {
 	    type: USER_LOGOUT
 	  };
 	}
 
 	function checkUser() {
-	  var response = _axios2.default.get('http://localhost:3006/api/check_user');
+	  var response = _axios2.default.get('http://103.253.146.179:3006/api/check_user');
+	  // let response = axios.get('http://localhost:3006/api/check_user')
 	  return {
 	    type: CHECK_USER,
 	    payload: response

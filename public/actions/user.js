@@ -17,15 +17,16 @@ export function userLogin() {
 }
 
 export function userLogout() {
-  // let response = axios.get('http://103.253.146.179:3006/api/destory_session')
-  let response = axios.get('http://localhost:3006/api/destory_session')
+  let response = axios.get('http://103.253.146.179:3006/api/destory_session')
+  // let response = axios.get('http://localhost:3006/api/destory_session')
   return {
     type: USER_LOGOUT
   }
 }
 
 export function checkUser() {
-  let response = axios.get('http://localhost:3006/api/check_user')
+  let response = axios.get('http://103.253.146.179:3006/api/check_user')
+  // let response = axios.get('http://localhost:3006/api/check_user')
   return {
     type: CHECK_USER,
     payload: response
